@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EDUGenie — Learn Smarter. Grow Faster.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/CSS/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+  <div class="app-layout">
+    <!-- LEFT SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-top">
+        <div class="brand">
+          <div class="brand-logo">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+            </svg>
+          </div>
+          <div>
+            <div class="brand-name">EDUGenie</div>
+            <div class="brand-tagline">Learn Smarter. Grow Faster.</div>
+          </div>
+        </div>
+
+        <nav class="nav-menu">
+          <a href="#" class="nav-item active" data-endpoint="/qa" data-prompt="">
+            <span class="nav-icon">🏠</span> Home
+          </a>
+          <a href="#" class="nav-item" data-endpoint="/qa" data-prompt="Let's chat! ">
+            <span class="nav-icon">💬</span> Chat
+          </a>
+          <a href="#" class="nav-item" data-endpoint="/qa" data-prompt="Show me the best study tools for ">
+            <span class="nav-icon">🎛️</span> Study Tools
+          </a>
+          <a href="#" class="nav-item" data-endpoint="/summarize" data-prompt="Generate study notes for ">
+            <span class="nav-icon">📑</span> Notes
+          </a>
+          <a href="#" class="nav-item" data-endpoint="/quiz" data-prompt="Generate a quick quiz on ">
+            <span class="nav-icon">📝</span> Quizzes
+          </a>
+          <a href="#" class="nav-item" data-endpoint="/learn/recommendations" data-prompt="Analyze my learning progress for ">
+            <span class="nav-icon">📈</span> Progress
+          </a>
+        </nav>
+      </div>
+
+      <div class="sidebar-bottom">
+        <div class="user-profile">
+          <div class="avatar">L</div>
+          <div class="user-meta">
+            <div class="user-name">Dedicated Learner</div>
+            <div class="user-role">Learner</div>
+          </div>
+          <span class="user-dropdown">⌄</span>
+        </div>
+        <ul class="sidebar-perks">
+          <li>✦ Better Questions</li>
+          <li>✦ Better Understanding</li>
+          <li>✦ A Brighter You</li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- CENTER MAIN CONTENT -->
+    <main class="main-content">
+      <header class="hero-header">
+        <div class="hero-text">
+          <h1>Hey Learner,<br/><span class="glow-title">What do you want to learn today?</span></h1>
+          <p>Ask questions, get clear answers, solve doubts, learn step by step. EDUGenie is here to help you anytime.</p>
+        </div>
+        <div class="hero-mascot">
+          <div class="mascot-orb">
+            <span class="mascot-emoji">🧞‍♂️</span>
+            <div class="mascot-badge">Your learning buddy</div>
+          </div>
+        </div>
+      </header>
+
+      <!-- PROMPT / ACTION CARD -->
+      <section class="prompt-box">
+        <div class="input-mode-tabs">
+          <button class="mode-tab active" data-endpoint="/qa" data-placeholder="Type your question here... (e.g. Explain photosynthesis in simple words)">
+            💬 Ask a Question
+          </button>
+          <button class="mode-tab" data-endpoint="/summarize" data-placeholder="Paste your notes or document text to summarize...">
+            📎 Upload / Notes
+          </button>
+          <button class="mode-tab" data-endpoint="/learn/recommendations" data-placeholder="What topic do you need a roadmap for?">
+            🗺️ Roadmap
+          </button>
+        </div>
+
+        <div class="textarea-wrapper">
+          <textarea id="prompt-input" rows="3" placeholder="Type your question here... (e.g. Explain photosynthesis in simple words)"></textarea>
+          <div class="textarea-expand">⤢</div>
+        </div>
+
+        <div class="prompt-controls">
+          <div class="controls-left">
+            <select id="mode-select" class="dropdown-control">
+              <option value="normal">Normal</option>
+              <option value="concise">Concise</option>
+              <option value="detailed">Detailed</option>
+            </select>
+
+            <!-- Multilingual Support -->
+            <select id="lang-select" class="dropdown-control">
+              <option value="English">🌐 English</option>
+              <option value="Tamil">🌐 Tamil</option>
+              <option value="Hindi">🌐 Hindi</option>
+              <option value="Spanish">🌐 Spanish</option>
+            </select>
+
+            <!-- Voice Interaction Toggle -->
+            <button id="voice-btn" class="icon-toggle-btn" title="Click to speak (Voice Input)">
+              🎤 <span id="voice-status">Voice</span>
+            </button>
+          </div>
+
+          <button id="send-button" class="btn-send">
+            <span>Send</span> ✈
+          </button>
+        </div>
+      </section>
+
+      <!-- FEATURE TILES -->
+      <section class="feature-grid">
+        <div class="feature-card" data-endpoint="/explain" data-prompt="Explain this concept in simple terms: ">
+          <div class="icon-bubble bulb">💡</div>
+          <h3>Explain Simply</h3>
+          <p>Get easy explanations</p>
+        </div>
+        <div class="feature-card" data-endpoint="/qa" data-prompt="Provide a step-by-step solution for: ">
+          <div class="icon-bubble code">&lt;/&gt;</div>
+          <h3>Solve Problems</h3>
+          <p>Step-by-step solutions</p>
+        </div>
+        <div class="feature-card" data-endpoint="/summarize" data-prompt="Organize and summarize key points for: ">
+          <div class="icon-bubble notes">📄</div>
+          <h3>Create Notes</h3>
+          <p>Well-organized summary</p>
+        </div>
+        <div class="feature-card" data-endpoint="/quiz" data-prompt="Generate a 3-question MCQ quiz on: ">
+          <div class="icon-bubble quiz">📋</div>
+          <h3>Make Quiz</h3>
+          <p>Test your knowledge</p>
+        </div>
+        <div class="feature-card" data-endpoint="/learn/recommendations" data-prompt="Create a detailed study plan and roadmap for: ">
+          <div class="icon-bubble plan">📅</div>
+          <h3>Study Plan</h3>
+          <p>Build your routine</p>
+        </div>
+      </section>
+
+      <!-- RESULTS / OUTPUT DISPLAY -->
+      <section id="output-area" class="output-card hidden">
+        <div class="output-header">
+          <span id="output-title">Gemini 3.8 Flash Response</span>
+          <div class="output-actions">
+            <!-- Audio Read-Aloud Button -->
+            <button id="speak-output-btn" class="btn-subtle">🔊 Read Aloud</button>
+            <button id="copy-btn" class="btn-subtle">Copy</button>
+          </div>
+        </div>
+        <div id="markdown-view" class="markdown-body"></div>
+        <div id="quiz-view" class="quiz-body hidden"></div>
+      </section>
+    </main>
+
+    <!-- RIGHT PANEL -->
+    <aside class="right-panel">
+      <!-- Catchy Motivational Phrase Card filling the space -->
+      <div class="goal-card" style="background: linear-gradient(135deg, #1e1b4b, #0f172a); border-color: #6366f1;">
+        <div class="goal-icon">🌟</div>
+        <div class="goal-info">
+          <h4>Knowledge is Power!</h4>
+          <p>Every question you ask brings you one step closer to mastery. Keep it up!</p>
+        </div>
+      </div>
+
+      <div class="panel-section">
+        <div class="section-title">
+          <span>Study Tools</span>
+          <a href="#" class="link-small">View all →</a>
+        </div>
+        <div class="tool-list">
+          <div class="tool-item" data-endpoint="/qa" data-prompt="Act as Math Solver. Solve this step by step: ">
+            <div class="tool-badge purple">➗</div>
+            <div class="tool-info">
+              <h5>Math Solver</h5>
+              <p>Step-by-step solutions</p>
+            </div>
+            <span>›</span>
+          </div>
+          <div class="tool-item" data-endpoint="/qa" data-prompt="Act as Code Helper. Debug and explain this code: ">
+            <div class="tool-badge green">&lt;&gt;</div>
+            <div class="tool-info">
+              <h5>Code Helper</h5>
+              <p>Debug & learn coding</p>
+            </div>
+            <span>›</span>
+          </div>
+          <div class="tool-item" data-endpoint="/qa" data-prompt="Act as Essay Writer. Draft and improve writing on: ">
+            <div class="tool-badge orange">✍️</div>
+            <div class="tool-info">
+              <h5>Essay Writer</h5>
+              <p>Draft & improve your writing</p>
+            </div>
+            <span>›</span>
+          </div>
+          <div class="tool-item" data-endpoint="/summarize" data-prompt="Generate flashcards with key concepts and definitions for: ">
+            <div class="tool-badge blue">🗂️</div>
+            <div class="tool-info">
+              <h5>Flashcards</h5>
+              <p>Revise faster</p>
+            </div>
+            <span>›</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-section">
+        <div class="section-title">
+          <span>Recent Chats</span>
+          <a href="#" class="link-small">View all →</a>
+        </div>
+        <div class="history-list" id="recent-chats">
+          <div class="history-item">
+            <span class="bubble-icon">💬</span>
+            <span class="history-text">Explain the nature of Statistics</span>
+            <span class="history-time">2h ago</span>
+          </div>
+          <div class="history-item">
+            <span class="bubble-icon">💬</span>
+            <span class="history-text">Inheritance and polymorphism (Python)</span>
+            <span class="history-time">5h ago</span>
+          </div>
+          <div class="history-item">
+            <span class="bubble-icon">💬</span>
+            <span class="history-text">SQL CREATE VIEW example</span>
+            <span class="history-time">1d ago</span>
+          </div>
+          <div class="history-item">
+            <span class="bubble-icon">💬</span>
+            <span class="history-text">Math Unit 4 doubt</span>
+            <span class="history-time">1d ago</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <script>
+    let activeEndpoint = '/qa';
+    const promptInput = document.getElementById('prompt-input');
+    const sendButton = document.getElementById('send-button');
+    const outputArea = document.getElementById('output-area');
+    const markdownView = document.getElementById('markdown-view');
+    const quizView = document.getElementById('quiz-view');
+    const langSelect = document.getElementById('lang-select');
+    
+    // Wire up Sidebar Navigation Links
+    const navItems = document.querySelectorAll('.nav-item');
+    navItems.forEach(item => {
+      item.addEventListener('click', (e) => {
+        e.preventDefault();
+        navItems.forEach(nav => nav.classList.remove('active'));
+        item.classList.add('active');
+        activeEndpoint = item.getAttribute('data-endpoint') || '/qa';
+        promptInput.value = item.getAttribute('data-prompt');
+        promptInput.focus();
+      });
+    });
+
+    // Wire up Mode Tabs
+    const modeTabs = document.querySelectorAll('.mode-tab');
+    modeTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        modeTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        activeEndpoint = tab.getAttribute('data-endpoint') || '/qa';
+        promptInput.placeholder = tab.getAttribute('data-placeholder');
+      });
+    });
+
+    // Wire up Center Feature Cards
+    const featureCards = document.querySelectorAll('.feature-card');
+    featureCards.forEach(card => {
+      card.addEventListener('click', () => {
+        activeEndpoint = card.getAttribute('data-endpoint');
+        promptInput.value = card.getAttribute('data-prompt');
+        promptInput.focus();
+      });
+    });
+
+    // Wire up Right Panel Study Tools
+    const toolItems = document.querySelectorAll('.tool-item');
+    toolItems.forEach(item => {
+      item.addEventListener('click', () => {
+        activeEndpoint = item.getAttribute('data-endpoint') || '/qa';
+        promptInput.value = item.getAttribute('data-prompt');
+        promptInput.focus();
+      });
+    });
+
+    // Wire up Recent Chats (Auto-submits previous questions)
+    const historyItems = document.querySelectorAll('.history-item');
+    historyItems.forEach(item => {
+      item.addEventListener('click', () => {
+        activeEndpoint = '/qa';
+        promptInput.value = item.querySelector('.history-text').innerText;
+        executeRequest(); 
+      });
+    });
+
+    // Submit Triggers
+    promptInput.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+        executeRequest();
+      }
+    });
+    sendButton.addEventListener('click', executeRequest);
+
+    // Main API Execution
+    async function executeRequest() {
+      const rawText = promptInput.value.trim();
+      if (!rawText) return;
+
+      const language = langSelect.value;
+      const finalPrompt = language !== 'English' 
+        ? `${rawText} (Please respond in ${language})` 
+        : rawText;
+
+      sendButton.disabled = true;
+      sendButton.innerHTML = 'Thinking...';
+
+      try {
+        const response = await fetch(activeEndpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ prompt: finalPrompt })
+        });
+
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.detail || 'Failed to process request');
+
+        outputArea.classList.remove('hidden');
+
+        if (activeEndpoint === '/quiz' && data.quiz) {
+          markdownView.classList.add('hidden');
+          quizView.classList.remove('hidden');
+          renderInteractiveQuiz(data.quiz);
+        } else {
+          quizView.classList.add('hidden');
+          markdownView.classList.remove('hidden');
+          markdownView.innerHTML = marked.parse(data.result || '');
+        }
+
+        outputArea.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      } catch (err) {
+        alert("Error: " + err.message);
+      } finally {
+        sendButton.disabled = false;
+        sendButton.innerHTML = '<span>Send</span> ✈';
+      }
+    }
+
+    // Interactive Quiz Logic
+    function renderInteractiveQuiz(questions) {
+      quizView.innerHTML = '';
+      questions.forEach((q, idx) => {
+        const block = document.createElement('div');
+        block.className = 'quiz-block';
+        block.innerHTML = `
+          <div class="quiz-q-title"><strong>Q${idx + 1}:</strong> ${q.question}</div>
+          <div class="quiz-options" id="opt-wrap-${idx}"></div>
+          <div class="quiz-feedback hidden" id="feedback-${idx}"></div>
+        `;
+
+        const optWrap = block.querySelector(`#opt-wrap-${idx}`);
+        const feedback = block.querySelector(`#feedback-${idx}`);
+
+        q.options.forEach(opt => {
+          const btn = document.createElement('button');
+          btn.className = 'quiz-choice-btn';
+          btn.textContent = opt;
+
+          btn.addEventListener('click', () => {
+            optWrap.querySelectorAll('button').forEach(b => b.disabled = true);
+            const isMatch = (opt.trim().toLowerCase() === q.correct_answer.trim().toLowerCase()) ||
+                            opt.startsWith(q.correct_answer);
+
+            if (isMatch) {
+              btn.classList.add('choice-correct');
+              feedback.className = 'quiz-feedback feedback-correct';
+              feedback.innerHTML = `✓ <strong>Correct!</strong> ${q.explanation || ''}`;
+            } else {
+              btn.classList.add('choice-wrong');
+              feedback.className = 'quiz-feedback feedback-wrong';
+              feedback.innerHTML = `✗ <strong>Incorrect.</strong> Correct answer: <em>${q.correct_answer}</em><br/>${q.explanation || ''}`;
+            }
+            feedback.classList.remove('hidden');
+          });
+
+          optWrap.appendChild(btn);
+        });
+        quizView.appendChild(block);
+      });
+    }
+
+    // Copy Button Logic
+    document.getElementById('copy-btn').addEventListener('click', () => {
+      navigator.clipboard.writeText(markdownView.innerText).then(() => {
+        const btn = document.getElementById('copy-btn');
+        btn.textContent = 'Copied!';
+        setTimeout(() => btn.textContent = 'Copy', 2000);
+      });
+    });
+
+    // Voice Interaction: Speech-to-Text (Microphone)
+    const voiceBtn = document.getElementById('voice-btn');
+    const voiceStatus = document.getElementById('voice-status');
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    if (SpeechRecognition) {
+      const recognizer = new SpeechRecognition();
+      recognizer.continuous = false;
+      recognizer.interimResults = false;
+
+      voiceBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        try {
+          recognizer.start();
+          voiceStatus.textContent = "Listening...";
+          voiceBtn.classList.add('recording');
+        } catch (err) {
+          recognizer.stop();
+        }
+      });
+
+      recognizer.onresult = (evt) => {
+        const transcript = evt.results[0][0].transcript;
+        promptInput.value = transcript;
+        voiceStatus.textContent = "Voice";
+        voiceBtn.classList.remove('recording');
+      };
+
+      recognizer.onerror = () => {
+        voiceStatus.textContent = "Voice";
+        voiceBtn.classList.remove('recording');
+      };
+
+      recognizer.onend = () => {
+        voiceStatus.textContent = "Voice";
+        voiceBtn.classList.remove('recording');
+      };
+    } else {
+      voiceBtn.title = "Speech recognition is not supported in this browser.";
+      voiceBtn.style.opacity = "0.5";
+    }
+
+    // Voice Interaction: Text-to-Speech (Read Aloud)
+    document.getElementById('speak-output-btn').addEventListener('click', () => {
+      const textToRead = markdownView.innerText;
+      if (!textToRead) return;
+      window.speechSynthesis.cancel(); // Stop any current speech
+      const utterance = new SpeechSynthesisUtterance(textToRead);
+      window.speechSynthesis.speak(utterance);
+    });
+  </script>
+</body>
+</html>
